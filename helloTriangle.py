@@ -18,7 +18,6 @@ def square():
 
 def iterate():
     glViewport(0, 0, 500, 500)
-    glViewport(0, 0, 500, 500)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     glOrtho(0.0, 500, 0.0, 500, 0.0, 1.0)
