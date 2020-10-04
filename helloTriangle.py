@@ -1,7 +1,6 @@
 import glfw
 from OpenGL.GL import *
 from OpenGL.GL.shaders import compileShader, compileProgram
-from ctypes import *
 import numpy as np
 
 
