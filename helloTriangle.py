@@ -2,7 +2,6 @@ import glfw
 from OpenGL.GL import *
 from OpenGL.GL.shaders import compileShader, compileProgram
 from ctypes import *
-from OpenGL.arrays import vbo as glvbo
 import numpy as np
 
 
@@ -34,11 +33,9 @@ void main()
 # Globals
 # =================================================
 
-VERTICES=glvbo.VBO(
-    np.array([0.0,  0.5, 0.0, 
+VERTICES=np.array([0.0,  0.5, 0.0, 
                0.5, -0.5, 0.0,
               -0.5, -0.5, 0.0], dtype='float32')
-)
 
 # =================================================
 
@@ -69,7 +66,7 @@ def main():
     VBO = glGenBuffers(1)
     glBindBuffer(GL_ARRAY_BUFFER, VBO)
 
-    glBufferData(GL_ARRAY_BUFFER, len(VERTICES)*VERTICES.itemsize, VERTICES.data, GL_STATIC_DRAW)
+    glBufferData(GL_ARRAY_BUFFER, len(VERTICES)*VERTICES.itemsize, VERTICES, GL_STATIC_DRAW)
     glEnableVertexAttribArray(0)
 
 
