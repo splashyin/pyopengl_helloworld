@@ -64,17 +64,14 @@ def main():
     # Make the window's context current
     glfw.make_context_current(window)
 
+    VAO = glGenVertexArrays(1)
+    glBindVertexArray(VAO)
     VBO = glGenBuffers(1)
     glBindBuffer(GL_ARRAY_BUFFER, VBO)
 
-    glBufferData(GL_ARRAY_BUFFER, len(VERTICES) *
-                 VERTICES.itemsize, VERTICES, GL_STATIC_DRAW)
-
-    VAO = glGenVertexArrays(1)
-    glBindVertexArray(VAO)
+    glBufferData(GL_ARRAY_BUFFER, len(VERTICES)*VERTICES.itemsize, VERTICES.data, GL_STATIC_DRAW)
     glEnableVertexAttribArray(0)
-    glBindBuffer(GL_ARRAY_BUFFER, VBO)
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, None)
+
 
     # Compile shaders
     compiledVertexShader = compileShader(VERTEX_SHADER, GL_VERTEX_SHADER)
@@ -90,6 +87,8 @@ def main():
 
     if glGetProgramiv(shader, GL_LINK_STATUS) != GL_TRUE:
         raise Exception("program did not link")
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, None)
 
     # Loop until the user closes the window
     while not glfw.window_should_close(window):
